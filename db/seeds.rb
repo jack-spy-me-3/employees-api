@@ -1,3 +1,4 @@
+Employee.destroy_all
 100.times do
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
@@ -8,3 +9,14 @@
                   birthdate: Faker::Date.between(65.years.ago, 18.years.ago)
                   )
 end
+
+100.times do
+  Address.create(address_1: Faker::Address.street_address,
+                address_2: Faker::Address.secondary_address,
+                city: Faker::Address.city,
+                state: Faker::Address.state,
+                zip: Faker::Address.zip,
+                employee_id: Employee.all.sample.id
+                )
+end
+puts "Database seeded!"

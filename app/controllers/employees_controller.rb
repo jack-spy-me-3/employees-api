@@ -30,6 +30,6 @@ class EmployeesController < ApplicationController
   def destroy
     @employee = Employee.find_by(id: params[:id])
     @employee.destroy
-    redirect_to "/employees"
+    render json: {message: "Goodbye! This employee has been fired!"}
   end
 end
