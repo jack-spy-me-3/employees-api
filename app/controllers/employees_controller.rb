@@ -14,4 +14,22 @@ class EmployeesController < ApplicationController
     @employee = Employee.create(first_name: params[:first_name], last_name: params[:last_name], email: params[:email])
     render "show.json.jbuilder"
   end
+
+  def update
+    @employee = Employee.find_by(id: params[:id])
+    # @employee.assign_attributes(first_name: params[:first_name] || @employee.first_name)
+    @employee.first_name = params[:first_name] || @employee.first_name
+    @employee.last_name = params[:last_name] || @employee.last_name
+    @employee.email = params[:email] || @employee.email
+    @employee.ssn = params[:ssn] || @employee.ssn
+    @employee.birthdate = params[:birthdate] || @employee.birthdate
+    @employee.save
+    render "show.json.jbuilder"
+  end
+
+  def destroy
+    @employee = Employee.find_by(id: params[:id])
+    @employee.destroy
+    redirect_to "/employees"
+  end
 end
